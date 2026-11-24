@@ -1,0 +1,135 @@
+site_name: SAES — Stochastic Algorithm Evaluation Suite
+site_url: https://saes-suite.github.io/saes/
+site_description: >-
+  Open-source scientific Python library for rigorous frequentist, Bayesian,
+  equivalence, power/sensitivity, and meta-benchmark statistical evaluation
+  of stochastic algorithms.
+site_author: Emilio R. Carreira & Antonio J. Nebro
+repo_url: https://github.com/saes-suite/saes
+repo_name: saes-suite/saes
+edit_uri: edit/main/docs/
+copyright: Copyright &copy; 2025–2026 SAES Contributors — Licensed under GPL-3.0-or-later
+
+theme:
+  name: material
+  logo: assets/logo.svg
+  favicon: assets/logo.svg
+  language: en
+  font:
+    text: Inter
+    code: JetBrains Mono
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: teal
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: teal
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - content.action.edit
+
+hooks:
+  - docs/hooks.py
+
+plugins:
+  - search
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          paths: [src]
+          options:
+            docstring_style: google
+            show_source: true
+            show_root_heading: true
+            show_root_full_path: false
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+            show_signature_annotations: true
+            separate_signature: true
+            merge_init_into_class: true
+            members_order: source
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+extra_css:
+  - stylesheets/extra.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/saes-suite/saes
+      name: SAES on GitHub
+  generator: false
+
+nav:
+  - Home: index.md
+  - Getting Started:
+      - Installation: getting-started/installation.md
+      - Quickstart Guide: getting-started/quickstart.md
+  - User Guide:
+      - Decision Engine & Safeguards: user-guide/decision-engine.md
+      - Blocked Omnibus & Post-Hoc Tests: user-guide/blocked-and-posthoc.md
+      - Bayesian Inference, MDES & TOST: user-guide/bayesian-and-equivalence.md
+      - Visualization, Tables & FAIR Packs: user-guide/visualization-and-tables.md
+  - Tutorials:
+      - Multi-Objective Metaheuristics Benchmark: tutorials/metaheuristics-benchmark.md
+      - ML Cross-Validation & Equivalence: tutorials/ml-crossvalidation.md
+  - Methodology: methodology.md
+  - API Reference:
+      - Python API Reference: api-reference.md
+      - REST API & Ecosystem: rest-api.md
+      - Extensibility & Plugins: extensibility.md
+  - Changelog: changelog.md

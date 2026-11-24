@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use SAES in scientific publications or empirical algorithm benchmarks, please cite it as below."
+type: software
+title: "SAES: Stochastic Algorithm Evaluation Suite"
+abstract: >-
+  Open-source scientific Python library for rigorous frequentist, exact Bayesian,
+  equivalence (TOST), sensitivity (MDES), and Dolan-More meta-benchmarking
+  statistical evaluation of stochastic optimization algorithms and machine learning models.
+authors:
+  - family-names: Carreira
+    given-names: Emilio R.
+  - family-names: Nebro
+    given-names: Antonio J.
+repository-code: "https://github.com/saes-suite/saes"
+url: "https://saes-suite.github.io/saes/"
+license: GPL-3.0-or-later
+keywords:
+  - statistics
+  - benchmarking
+  - metaheuristics
+  - hypothesis-testing
+  - bayesian-statistics
+  - nonparametric
+  - critical-distance
+  - performance-profiles
+  - equivalence-testing
+  - reproducibility

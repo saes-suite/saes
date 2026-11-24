@@ -1,0 +1,120 @@
+/* SAES Scientific Documentation Custom Theme Enhancements */
+
+:root {
+  --saes-hero-gradient: linear-gradient(135deg, rgba(63, 81, 181, 0.10) 0%, rgba(0, 150, 136, 0.10) 100%);
+  --saes-border: rgba(100, 116, 139, 0.22);
+}
+
+[data-md-color-scheme="slate"] {
+  --saes-hero-gradient: linear-gradient(135deg, rgba(99, 102, 241, 0.18) 0%, rgba(20, 184, 166, 0.14) 100%);
+  --saes-border: rgba(148, 163, 184, 0.20);
+}
+
+/* Hero Banner */
+.saes-hero {
+  background: var(--saes-hero-gradient);
+  border: 1px solid var(--saes-border);
+  border-radius: 1rem;
+  padding: 2rem 2.25rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.saes-hero-logo {
+  width: 84px;
+  height: 84px;
+  flex-shrink: 0;
+  border-radius: 0.75rem;
+}
+
+.saes-hero-body {
+  flex: 1 1 320px;
+}
+
+.saes-hero-body h1 {
+  margin: 0 0 0.5rem 0 !important;
+  font-size: 1.9rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.saes-hero-body p {
+  margin: 0 0 1.1rem 0;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  opacity: 0.92;
+}
+
+.saes-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.saes-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 0.9rem;
+}
+
+.saes-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.18rem 0.6rem;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-family: var(--md-code-font-family);
+  background: rgba(99, 102, 241, 0.14);
+  color: var(--md-primary-fg-color);
+  border: 1px solid rgba(99, 102, 241, 0.28);
+}
+
+/* Publication Figure Framing */
+.saes-figure {
+  border: 1px solid var(--saes-border);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  background: #ffffff;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.05);
+}
+
+.saes-figure img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.saes-figure figcaption {
+  margin-top: 0.75rem;
+  font-size: 0.82rem;
+  color: #475569;
+  text-align: left;
+  line-height: 1.45;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 0.6rem;
+}
+
+/* Subtle polish on Material grids */
+.md-typeset .grid.cards > ul > li {
+  border-radius: 0.75rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.md-typeset .grid.cards > ul > li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+/* Tighter, cleaner API tables */
+.md-typeset table:not([class]) th {
+  font-weight: 700;
+  white-space: nowrap;
+}

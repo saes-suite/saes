@@ -3,13 +3,40 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "saesV2"
-version = "0.3.1"
+name = "saes"
+version = "1.5.0"
 description = "Stochastic Algorithm Evaluation Suite - Scientific Python library for statistical benchmarking"
 readme = "README.md"
+license = { text = "GPL-3.0-or-later" }
 requires-python = ">=3.11"
 authors = [
-    { name = "SAES Team" }
+    { name = "Emilio R. Carreira" },
+    { name = "Antonio J. Nebro" },
+]
+keywords = [
+    "statistics",
+    "benchmarking",
+    "metaheuristics",
+    "hypothesis-testing",
+    "bayesian-statistics",
+    "nonparametric",
+    "friedman",
+    "critical-distance",
+    "performance-profiles",
+    "stochastic-algorithms",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Typing :: Typed",
 ]
 dependencies = [
     "numpy>=1.24.0",
@@ -17,8 +44,14 @@ dependencies = [
     "pydantic>=2.0.0",
     "scipy>=1.10.0",
     "statsmodels>=0.14.0",
-    "tabulate>=0.9.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/saes-suite/saes"
+Documentation = "https://saes-suite.github.io/saes/"
+Repository = "https://github.com/saes-suite/saes"
+Issues = "https://github.com/saes-suite/saes/issues"
+Changelog = "https://github.com/saes-suite/saes/blob/main/CHANGELOG.md"
 
 [project.optional-dependencies]
 viz = [
@@ -31,6 +64,11 @@ api = [
     "uvicorn>=0.28.0",
     "pydantic>=2.0.0",
     "python-multipart>=0.0.9",
+]
+docs = [
+    "mkdocs>=1.6.0,<2.0.0",
+    "mkdocs-material>=9.5.0",
+    "mkdocstrings[python]>=0.26.0",
 ]
 dev = [
     "pytest>=7.4.0",
@@ -48,14 +86,14 @@ dev = [
     "python-multipart>=0.0.9",
 ]
 all = [
-    "saesV2[viz,api]",
+    "saes[viz,api]",
 ]
 
 [project.scripts]
-saes-api = "saesV2.server.app:main"
+saes-api = "saes.server.app:main"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/saesV2"]
+packages = ["src/saes"]
 
 [tool.ruff]
 line-length = 120
@@ -63,7 +101,6 @@ target-version = "py311"
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "B", "UP", "N"]
-ignore = ["N999"]
 
 [tool.mypy]
 python_version = "3.12"
@@ -74,4 +111,4 @@ files = ["src"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
-addopts = "-v --cov=saesV2 --cov-report=term-missing"
+addopts = "-v --cov=saes --cov-report=term-missing"

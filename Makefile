@@ -1,8 +1,9 @@
-.PHONY: help install start-api build lint format test ci release-dry-run release-stamp version branch
+.PHONY: help install start-api build lint format test ci docs docs-serve docs-preview start-docs release-dry-run release-stamp version branch
 
 # ── Variables ────────────────────────────────────────────────
 BUMP      ?= minor
 AUTHOR    ?=
+DOCS_PORT ?= 8000
 
 # ── Default ──────────────────────────────────────────────────
 help: ## Show this help
@@ -10,12 +11,12 @@ help: ## Show this help
 		awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}'
 
 # ── Setup ────────────────────────────────────────────────────
-install: ## Install saesV2 dependencies with all extras via uv
+install: ## Install saes dependencies with all extras via uv
 	uv sync --extra dev
 
 # ── Run ──────────────────────────────────────────────────────
 start-api: ## Launch FastAPI REST server
-	uv run uvicorn saesV2.server.app:app --reload --port 8060
+	uv run uvicorn saes.server.app:app --reload --port 8060
 
 build: ## Build wheel and sdist packages
 	uv build
@@ -32,6 +33,20 @@ test: ## Run test suite
 	uv run pytest
 
 ci: lint test ## Run full CI quality gate
+
+# ── Documentation (GitHub Pages) ─────────────────────────────
+docs: ## Build MkDocs Material static site in strict mode (exact GitHub Pages output)
+	uv run --extra viz --extra api --extra docs mkdocs build --strict --site-dir site
+
+docs-serve: ## Preview GitHub Pages documentation locally with live reload (:8000)
+	@echo "📚 Serving SAES documentation at http://127.0.0.1:$(DOCS_PORT)"
+	uv run --extra viz --extra api --extra docs mkdocs serve -a 127.0.0.1:$(DOCS_PORT)
+
+docs-preview: docs ## Build strict static site and serve exact GitHub Pages bundle (:8000)
+	@echo "📚 Serving static GitHub Pages build at http://127.0.0.1:$(DOCS_PORT)"
+	@python3 -m http.server $(DOCS_PORT) --bind 127.0.0.1 --directory site
+
+start-docs: docs-serve ## Alias for docs-serve (launch local GitHub Pages preview)
 
 # ── Release ──────────────────────────────────────────────────
 version: ## Show current version from version.txt

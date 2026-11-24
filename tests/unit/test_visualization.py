@@ -5,17 +5,17 @@ import plotly.graph_objects as go
 import pytest
 from matplotlib.figure import Figure
 
-from saesV2.domain.exceptions import VisualizationError
-from saesV2.visualization.barplot import BarPlotGenerator
-from saesV2.visualization.bayesianplot import BayesianRankPlotGenerator
-from saesV2.visualization.boxplot import BoxplotGenerator
-from saesV2.visualization.cdplot import CriticalDistancePlotGenerator
-from saesV2.visualization.ecdfplot import ECDFPlotGenerator
-from saesV2.visualization.lineplot import LinePlotGenerator
-from saesV2.visualization.registry import PlotterRegistry
-from saesV2.visualization.scatterplot import ScatterPlotGenerator
-from saesV2.visualization.utils import get_color_map, to_hex_color
-from saesV2.visualization.violinplot import ViolinPlotGenerator
+from saes.domain.exceptions import VisualizationError
+from saes.visualization.barplot import BarPlotGenerator
+from saes.visualization.bayesianplot import BayesianRankPlotGenerator
+from saes.visualization.boxplot import BoxplotGenerator
+from saes.visualization.cdplot import CriticalDistancePlotGenerator
+from saes.visualization.ecdfplot import ECDFPlotGenerator
+from saes.visualization.lineplot import LinePlotGenerator
+from saes.visualization.registry import PlotterRegistry
+from saes.visualization.scatterplot import ScatterPlotGenerator
+from saes.visualization.utils import get_color_map, to_hex_color
+from saes.visualization.violinplot import ViolinPlotGenerator
 
 
 @pytest.fixture
@@ -139,6 +139,8 @@ def test_plotter_registry() -> None:
         "violin",
         "critical-distance",
         "bayesian-rank",
+        "plackett-luce",
+        "effect-size-forest",
         "barplot",
         "lineplot",
         "ecdf",
@@ -146,7 +148,7 @@ def test_plotter_registry() -> None:
     }
     for p in expected_plotters:
         assert p in available
-    assert len(available) == 8
+    assert len(available) == 10
 
     boxplot_instance = PlotterRegistry.get("boxplot")
     assert isinstance(boxplot_instance, BoxplotGenerator)
@@ -171,12 +173,12 @@ def test_custom_color_map() -> None:
 
 
 def test_export_plot_api(sample_df: pd.DataFrame) -> None:
-    import saesV2
-    from saesV2.domain.models import Dataset
+    import saes
+    from saes.domain.models import Dataset
 
     ds = Dataset(df=sample_df)
     for fmt, expected_mt in [("png", "image/png"), ("svg", "image/svg+xml"), ("pdf", "application/pdf")]:
-        raw, media_type, ext = saesV2.export_plot(
+        raw, media_type, ext = saes.export_plot(
             ds, plot_type="boxplot", metric="HV", export_format=fmt, dpi=100
         )
         assert media_type == expected_mt
@@ -184,4 +186,4 @@ def test_export_plot_api(sample_df: pd.DataFrame) -> None:
         assert len(raw) > 50
 
     with pytest.raises(ValueError, match="Unsupported plot export format"):
-        saesV2.export_plot(ds, plot_type="boxplot", metric="HV", export_format="bmp")
+        saes.export_plot(ds, plot_type="boxplot", metric="HV", export_format="bmp")

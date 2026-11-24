@@ -4,7 +4,7 @@ import io
 
 from fastapi.testclient import TestClient
 
-from saesV2.server.app import app
+from saes.server.app import app
 
 client = TestClient(app)
 
@@ -188,7 +188,7 @@ def test_tables_and_explore_endpoints() -> None:
     res_rep = client.post("/api/v1/reproducibility", files={"file": ("data.csv", rep_file, "text/csv")})
     assert res_rep.status_code == 200
     rep_data = res_rep.json()
-    assert "import saesV2" in rep_data["python_script"]
+    assert "import saes" in rep_data["python_script"]
     assert "nbformat" in rep_data["jupyter_notebook_json"]
 
     # Test Plot export endpoint (png, svg, pdf)
@@ -202,4 +202,38 @@ def test_tables_and_explore_endpoints() -> None:
         assert res_plot.status_code == 200
         assert res_plot.headers["content-type"].startswith(expected_ct)
         assert len(res_plot.content) > 50
+
+    # Test new CSV endpoints: posthoc, tost, bayesian correlated-ttest, effect-sizes
+    ph_res = client.post(
+        "/api/v1/posthoc",
+        files={"file": ("data.csv", io.BytesIO(SAMPLE_CSV.encode("utf-8")), "text/csv")},
+        data={"metric": "HV", "instance": "ZDT1", "method": "auto"},
+    )
+    assert ph_res.status_code == 200
+    assert len(ph_res.json()["comparisons"]) == 1
+
+    tost_res = client.post(
+        "/api/v1/tost",
+        files={"file": ("data.csv", io.BytesIO(SAMPLE_CSV.encode("utf-8")), "text/csv")},
+        data={"metric": "HV", "instance": "ZDT1", "algo_a": "NSGAII", "algo_b": "MOEAD", "low_eqbound": "0.05"},
+    )
+    assert tost_res.status_code == 200
+    assert "is_equivalent" in tost_res.json()
+
+    bct_res = client.post(
+        "/api/v1/bayesian/correlated-ttest",
+        files={"file": ("data.csv", io.BytesIO(SAMPLE_CSV.encode("utf-8")), "text/csv")},
+        data={"metric": "HV", "instance": "ZDT1", "algo_a": "MOEAD", "algo_b": "NSGAII", "rope": "0.01", "rho": "0.1"},
+    )
+    assert bct_res.status_code == 200
+    assert len(bct_res.json()["curve_x"]) > 10
+
+    ef_res = client.post(
+        "/api/v1/effect-sizes",
+        files={"file": ("data.csv", io.BytesIO(SAMPLE_CSV.encode("utf-8")), "text/csv")},
+        data={"metric": "HV", "instance": "ZDT1"},
+    )
+    assert ef_res.status_code == 200
+    assert len(ef_res.json()["items"]) == 1
+
 

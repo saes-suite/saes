@@ -33,3 +33,6 @@ wheels/
 # User benchmark datasets storage
 /datasets/
 /data/
+
+# Built MkDocs GitHub Pages site
+/site/
