@@ -7,8 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [Released]
+
+## [2.0.0] — 2026-11-24 (@rorro6787)
+
 ### Added
 
+
+- Updated `.github/workflows/release.yml` to authenticate release stamp pushes and GitHub Releases via the `saes-release-bot` GitHub App (`actions/create-github-app-token@v1`) so protected `main` rulesets remain enforced.
 - Exact confidence intervals on all parametric and non-parametric effect sizes (`saes.stats.effect_sizes`): noncentral-$t$ CIs for Cohen's $d$ / Hedges' $g$ (`cohens_d_ci`), noncentral-$F$ CIs for ANOVA $\eta^2$ (`eta_squared_ci`), Brunner–Munzel logit-transformed CIs for Vargha–Delaney $A_{12}$ and Cliff's $\delta$ (`vargha_delaney_a12_ci`, `cliffs_delta_ci`), and percentile bootstrap CIs for Kruskal–Wallis $\varepsilon^2$ (`epsilon_squared_ci`), automatically populated on every `StatisticalResult.effect_size`.
 - Comprehensive multiple-comparison adjustments and post-hoc test suite (`saes.stats.posthoc`): extended `adjust_pvalues` to 11 procedures (`holm`, `bonferroni`, `hochberg`, `hommel`, `finner`, `holland`, `rom`, `li`, `fdr_bh`, `fdr_by`, `none`), added Shaffer's static (`adjust_pvalues_shaffer`) and exact Bergmann–Hommel exhaustive (`adjust_pvalues_bergmann_hommel`) matrix procedures, plus `tukey_hsd`, `games_howell`, `dunnett`, `dunn`, `conover_iman`, and `BrunnerMunzelTest` (`saes.statistics.brunner_munzel`).
 - Blocked multi-instance omnibus tests (`saes.stats.ranking`): `FriedmanAlignedRanksTest` (`saes.statistics.friedman_aligned_ranks`), `QuadeTest` (`saes.statistics.quade`), and `RepeatedMeasuresANOVA` with Greenhouse–Geisser sphericity $\varepsilon$ (`saes.statistics.rm_anova`).
@@ -38,8 +44,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Breaking (v2.0.0 Consolidation)**: Consolidated the PEP 8 Python package and PyPI distribution from `saesV2` into canonical **`saes`** (`pip install saes`, `import saes`), succeeding SAES `1.5.0` on PyPI and removing Ruff `N999` suppression. Legacy SAES v1 users should pin `pip install "SAES<2"`.
 - Modularized `saes.stats.tables` by extracting LaTeX, Markdown, CSV, HTML, DOCX, and PDF presentation renderers into `saes.reports.renderers` (fully re-exported for backward compatibility) with clean `ConfigurationError` handling when `[viz]` is not installed.
 - Removed unused `tabulate` dependency from `pyproject.toml`.
-
-## [Released]
 
 ## [0.3.1] — 2026-11-20 (@rorro6787)
 
@@ -101,4 +105,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Decoupled and extracted `chat`, `mcp`, and `plugins` into the dedicated `saes-ai` package.
 - `saes.server.app` now dynamically mounts `saes_ai.server.routes` when `saes-ai` is installed without internal legacy fallbacks.
 - Cleaned core dependencies by removing `chat` extra and delegating AI tooling to `[ai]` optional extra (`saes-ai`).
-
