@@ -124,6 +124,7 @@ nav:
       - Blocked Omnibus & Post-Hoc Tests: user-guide/blocked-and-posthoc.md
       - Bayesian Inference, MDES & TOST: user-guide/bayesian-and-equivalence.md
       - Visualization, Tables & FAIR Packs: user-guide/visualization-and-tables.md
+      - Pareto Fronts & EAF Plugin: user-guide/pareto-plugin.md
   - Tutorials:
       - Multi-Objective Metaheuristics Benchmark: tutorials/metaheuristics-benchmark.md
       - ML Cross-Validation & Equivalence: tutorials/ml-crossvalidation.md

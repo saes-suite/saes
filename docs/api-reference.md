@@ -69,6 +69,12 @@ Every capability in the SAES ecosystem is exposed first as a strongly typed Pyth
 - `minimum_detectable_effect(n, target_power=0.80, alpha=0.05, paired=False) -> float`
 - `tost(x1, x2, low_eqbound, high_eqbound=None, alpha=0.05, paired=False, equal_var=False, ...) -> TOSTResult`
 
+### Extensibility & Python Plugins (`saes.plugins` / `saes.PluginRegistry`)
+- `saes.plugins.discover(force=False) -> list[PluginManifest]` — Discover installed `entry_points` (`saes.tests`, `saes.renderers`, `saes.plotters`, `saes.plugins`).
+- `saes.plugins.list_installed() -> list[PluginManifest]` — List active SAES domain plugins.
+- `saes.plugins.get(plugin_id) -> SAESPlugin` / `saes.plugins.get_namespace(plugin_id) -> Any` — Access a plugin instance or its Python API namespace.
+- `saes.plugins.register(plugin)` / `saes.plugins.unregister(plugin_id)` — Programmatic runtime registration.
+
 ---
 
 ## 3. Auto-Generated Module Documentation

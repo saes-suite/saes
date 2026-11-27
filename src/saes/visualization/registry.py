@@ -53,6 +53,9 @@ class PlotterRegistry:
         Returns:
             Plotter instance.
         """
+        from saes.plugins.registry import PluginRegistry
+
+        PluginRegistry.discover_plotters()
         key_lower = key.lower()
         if key_lower not in cls._registry:
             valid_keys = ", ".join(cls._registry.keys())
@@ -66,6 +69,9 @@ class PlotterRegistry:
         Returns:
             dict mapping key -> {'name': str, 'description': str}
         """
+        from saes.plugins.registry import PluginRegistry
+
+        PluginRegistry.discover_plotters()
         result: dict[str, dict[str, str]] = {}
         for key, cls_type in cls._registry.items():
             instance = cls_type()

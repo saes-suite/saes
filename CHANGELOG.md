@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- PEP-standard Python plugin discovery and domain extension architecture (`saes.plugins`, exported as `saes.PluginManifest`, `saes.SAESPlugin`, `saes.PluginRegistry`, and `saes.plugins`): automatically discovers built-in and external packages via `importlib.metadata.entry_points` across four groups (`saes.tests`, `saes.renderers`, `saes.plotters`, `saes.plugins`) with graceful fault isolation.
+- Built-in reference domain plugin **`saes.plugins.pareto`** (`ParetoPlugin`, registered via `[project.entry-points."saes.plugins"]`):
+  - Multi-objective Pareto front domain models (`ParetoFront`, `FrontCollection`), vectorized non-dominated filtering, set coverage matrix $C(A, B)$, and representative run selection (best / median / worst / accumulated front).
+  - Exact 2D Empirical Attainment Functions (EAF), attainment surfaces (0%, 25%, 50%, 75%, 100%), pairwise $\Delta\text{EAF}(z)$ spatial advantage surfaces, and deterministic KS-EAF Monte Carlo permutation hypothesis tests.
+  - Multi-objective quality indicators (`HV` exact 2D & 3D, `IGD`, `IGD+`, `GD`, `EPS`, `Spacing`) with direct bridge `FrontCollection.to_indicators_dataset() -> saes.Dataset`.
+  - Flexible I/O (tidy CSV, `.pf` reference fronts, jMetal/PlatEMO `FUN.*.tsv` trees, ZIP archives, built-in ZDT1–3 & DTLZ2 demo suite), 7 dual Matplotlib/Plotly visualization modes (`attainment`, `runs`, `representative`, `eaf-diff`, `small-multiples`, `3d`, `pcp`) with full publication styling parity (`title`, `title_mode`, `legend_placement`, `font_size`, `font_family`, `label_mode`, `bold_mode`, `show_grid`, `dark_theme`, `width_px`, `height_px`), reference-only plotting (`algorithms=[]`, `show_reference=True`), non-overlapping legends & colorbars, and FastAPI routes auto-mounted under `/api/v1/plugins/pareto`.
+- Lazy entry-point discovery integrated into `TestRegistry`, `TableRendererRegistry`, and `PlotterRegistry`.
+- REST plugin discovery endpoint `GET /api/v1/plugins` (`PluginRegistryResponse`) and automatic mounting of plugin-provided FastAPI `APIRouter` instances under `/api/v1/plugins/<plugin_id>` in `saes.server.app.create_app()`.
+- Expanded `docs/extensibility.md` and added dedicated GitHub Pages guide `docs/user-guide/pareto-plugin.md` covering multi-file, tidy CSV, `.pf`, and jMetal ZIP input formats, exact EAF/KS-EAF methodology, and REST endpoints (including `POST /api/v1/plugins/pareto/collections/create-multi`).
+
 ## [Released]
 
 ## [2.0.0] — 2026-11-24 (@rorro6787)

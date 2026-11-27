@@ -65,6 +65,14 @@ Evaluating stochastic algorithms across multiple problem instances introduces we
 
     [:octicons-arrow-right-24: Visualizations & Tables](user-guide/visualization-and-tables.md)
 
+-   :material-puzzle-outline:{ .lg .middle } **PEP Plugin System & Built-in Pareto/EAF Analytics**
+
+    ---
+
+    Extend SAES via standard Python `entry_points` (`saes.plugins`), demonstrated by the built-in `saes.plugins.pareto` plugin (exact 2D EAFs, KS-EAF permutation tests, $C(A, B)$ coverage, and quality indicator extraction to `saes.Dataset`).
+
+    [:octicons-arrow-right-24: Pareto & EAF Guide](user-guide/pareto-plugin.md) · [:octicons-arrow-right-24: Plugins API](extensibility.md)
+
 </div>
 
 ## Installation

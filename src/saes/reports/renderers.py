@@ -982,6 +982,9 @@ class TableRendererRegistry:
     @classmethod
     def get(cls, key: str) -> TableRenderer:
         """Instantiate a registered renderer by format key."""
+        from saes.plugins.registry import PluginRegistry
+
+        PluginRegistry.discover_renderers()
         norm = key.strip().lower()
         if norm not in cls._registry:
             raise StatisticalAnalysisError(f"Unsupported table export format: '{key}'.")
@@ -990,6 +993,9 @@ class TableRendererRegistry:
     @classmethod
     def list_available(cls) -> list[str]:
         """Return sorted list of registered format keys."""
+        from saes.plugins.registry import PluginRegistry
+
+        PluginRegistry.discover_renderers()
         return sorted(cls._registry.keys())
 
 

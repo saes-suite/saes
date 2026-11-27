@@ -2,6 +2,7 @@
 
 from typing import Any
 
+import saes.plugins as plugins
 from saes._version import __version__ as __version__
 from saes.api import (
     analyze,
@@ -64,6 +65,7 @@ from saes.domain.models import (
     ValidationReport,
     WinTieLossCell,
 )
+from saes.plugins.registry import PluginManifest, PluginRegistry, SAESPlugin
 from saes.reports.renderers import TableRenderer, TableRendererRegistry
 from saes.stats.base import StatisticalTest
 from saes.stats.registry import TestRegistry
@@ -112,6 +114,10 @@ __all__ = [
     "TableRenderer",
     "TableRendererRegistry",
     "PlotterRegistry",
+    "PluginManifest",
+    "SAESPlugin",
+    "PluginRegistry",
+    "plugins",
     "SAESError",
     "InputError",
     "ValidationError",

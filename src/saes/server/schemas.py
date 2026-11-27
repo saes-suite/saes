@@ -22,6 +22,7 @@ from saes.domain.models import (
     TOSTResult,
     ValidationIssue,
 )
+from saes.plugins.registry import PluginManifest
 
 
 class HealthResponse(BaseModel):
@@ -119,3 +120,12 @@ PostHocResponse = PostHocResult
 TOSTResponse = TOSTResult
 BayesianCorrelatedTResponse = BayesianCorrelatedTResult
 EffectSizeForestResponse = EffectSizeForestResult
+
+
+class PluginRegistryResponse(BaseModel):
+    """Discovery payload listing installed SAES plugins and registered extension keys."""
+
+    plugins: list[PluginManifest] = Field(default_factory=list)
+    registered_tests: list[str] = Field(default_factory=list)
+    registered_renderers: list[str] = Field(default_factory=list)
+    registered_plotters: list[str] = Field(default_factory=list)

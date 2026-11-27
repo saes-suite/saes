@@ -92,6 +92,9 @@ all = [
 [project.scripts]
 saes-api = "saes.server.app:main"
 
+[project.entry-points."saes.plugins"]
+pareto = "saes.plugins.pareto.plugin:ParetoPlugin"
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/saes"]
 

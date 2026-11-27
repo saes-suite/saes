@@ -43,6 +43,9 @@ class TestRegistry:
     @classmethod
     def get(cls, key: str, **kwargs: Any) -> StatisticalTest:
         """Instantiate a registered `StatisticalTest` by key."""
+        from saes.plugins.registry import PluginRegistry
+
+        PluginRegistry.discover_tests()
         norm_key = key.strip().lower()
         if norm_key not in cls._registry:
             valid = ", ".join(sorted(cls._registry.keys()))
@@ -52,4 +55,7 @@ class TestRegistry:
     @classmethod
     def list_available(cls) -> list[str]:
         """Return sorted list of all registered statistical test keys."""
+        from saes.plugins.registry import PluginRegistry
+
+        PluginRegistry.discover_tests()
         return sorted(cls._registry.keys())

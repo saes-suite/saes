@@ -4,9 +4,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from saes._version import __version__
+from saes.plugins.registry import PluginRegistry
 from saes.server.routes.analysis import router as analysis_router
 from saes.server.routes.datasets import router as datasets_router
 from saes.server.routes.health import router as health_router
+from saes.server.routes.plugins import router as plugins_router
 
 
 def create_app() -> FastAPI:
@@ -28,6 +30,8 @@ def create_app() -> FastAPI:
     app.include_router(health_router)
     app.include_router(datasets_router)
     app.include_router(analysis_router)
+    app.include_router(plugins_router)
+    PluginRegistry.mount_api_routers(app)
 
     return app
 
