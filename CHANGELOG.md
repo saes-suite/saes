@@ -7,12 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [Released]
+
+## [2.1.1] — 2026-11-27 (@rorro6787)
+
 ### Security
 
 - Upgraded locked dependencies in `uv.lock` to remediate Dependabot advisories across `pillow` (`12.3.0` → `13.0.0`), `pymdown-extensions` (`10.21.2` → `12.3` / `13.0`), `mkdocs-material` (`9.7.6` → `9.8.2`), and `certifi` (`2026.7.22` → `2026.11.20`), along with `mkdocstrings` (`1.0.4` → `1.0.8`) and `mkdocstrings-python` (`2.0.3` → `2.0.11`) for `pymdown-extensions` 13 compatibility.
 - Tightened minimum version constraints in `pyproject.toml` for `pydantic` (`>=2.4.0`), `python-multipart` (`>=0.0.31`), `mkdocs-material` (`>=9.7.7`), `mkdocstrings[python]` (`>=1.0.8`), and `pytest` (`>=9.0.3`) to exclude known vulnerable or incompatible releases.
-
-## [Released]
 
 ## [2.1.0] — 2026-11-27 (@rorro6787)
 
