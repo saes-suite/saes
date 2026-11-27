@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [Released]
+
+## [2.1.0] — 2026-11-27 (@rorro6787)
+
 ### Added
 
 - PEP-standard Python plugin discovery and domain extension architecture (`saes.plugins`, exported as `saes.PluginManifest`, `saes.SAESPlugin`, `saes.PluginRegistry`, and `saes.plugins`): automatically discovers built-in and external packages via `importlib.metadata.entry_points` across four groups (`saes.tests`, `saes.renderers`, `saes.plotters`, `saes.plugins`) with graceful fault isolation.
@@ -18,8 +22,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Lazy entry-point discovery integrated into `TestRegistry`, `TableRendererRegistry`, and `PlotterRegistry`.
 - REST plugin discovery endpoint `GET /api/v1/plugins` (`PluginRegistryResponse`) and automatic mounting of plugin-provided FastAPI `APIRouter` instances under `/api/v1/plugins/<plugin_id>` in `saes.server.app.create_app()`.
 - Expanded `docs/extensibility.md` and added dedicated GitHub Pages guide `docs/user-guide/pareto-plugin.md` covering multi-file, tidy CSV, `.pf`, and jMetal ZIP input formats, exact EAF/KS-EAF methodology, and REST endpoints (including `POST /api/v1/plugins/pareto/collections/create-multi`).
-
-## [Released]
 
 ## [2.0.0] — 2026-11-24 (@rorro6787)
 
